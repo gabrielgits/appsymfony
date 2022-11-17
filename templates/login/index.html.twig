@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login!{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-4 offset-4">
+            <h1>User Login</h1>
+            {% if loginError %}
+                <div>{{ loginError.messageKey|trans(loginError.messageData, 'security') }} </div>
+            {% endif %}
+            <form action="{{ path('app_login') }}" method="post">
+                <input type="hidden" name="_target_path" value="/news">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" value="{{ loginUserName }}" name="_email" id="email" class="form-control" autocomplete="email" required autofocus>
+                <label for="password" class="form-label">Password</label>
+                <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}">
+                <br>
+                <button class="btn btn-lg btn-primary" type="submit">
+                    Sign in
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
