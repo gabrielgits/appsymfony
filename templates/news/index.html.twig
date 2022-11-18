@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}News index{% endblock %}
+{% block title %}News List{% endblock %}
 
 {% block body %}
-    <h1>News index</h1>
+    <h1>News List</h1>
 
+    <a class="btn btn-primary" href="{{ path('app_news_new') }}">Create new</a>
     <table class="table">
         <thead>
             <tr>
@@ -38,6 +39,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_news_new') }}">Create new</a>
 {% endblock %}
