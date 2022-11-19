@@ -6,6 +6,7 @@ use App\Entity\News;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class NewsType extends AbstractType
 {
@@ -14,7 +15,12 @@ class NewsType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('picture')
+            ->add('picture',FileType::class, array(
+                'multiple' => false,
+                'attr' => array('accept' => 'image/*')
+                )
+            )
+            //->add('picture')
             ->add('created_at')
             ->add('updated_at')
         ;

@@ -16,11 +16,6 @@
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{{ path('app_home') }}"> Appcake Test</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -31,6 +26,13 @@
         </li>
         </ul>
     </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <span class="navbar-brand">{{ app.user.email }}</span>
+        <a class="navbar-brand" class="btn btn-danger" href="{{ path('app_logout') }}"> Logout</a>
+    {% else %}
+        <span class="navbar-brand">You are not logged</span>
+        <a class="navbar-brand" class="btn btn-danger" href="{{ path('app_login') }}"> Login</a>
+    {% endif %}
 </nav>
     <div class="container">
         {% block body %}{% endblock %}

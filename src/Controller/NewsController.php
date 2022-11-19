@@ -81,8 +81,13 @@ class NewsController extends AbstractController
      */
     public function delete(Request $request, News $news, NewsRepository $newsRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$news->getId(), $request->request->get('_token'))) {
-            $newsRepository->remove($news, true);
+
+        $hasAccess = $this->isGranted('ROLE_ADMIN');
+        if ($hasAccess) {
+
+            if ($this->isCsrfTokenValid('delete'.$news->getId(), $request->request->get('_token'))) {
+                $newsRepository->remove($news, true);
+            }
         }
 
         return $this->redirectToRoute('app_news_index', [], Response::HTTP_SEE_OTHER);
